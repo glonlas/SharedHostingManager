@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+
+set_time_limit(0);
+ 
+require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../app/config/config.php';
+
+use Symfony\Component\Console\Application;
+
+$application = new Application('Shared Hosting Manager', '0.1.0');
+
+// Add Controllers
+$application->addCommands(
+	array(
+    	new SharedHostingManager\Command\WebsiteAddCommand(),
+    	new SharedHostingManager\Command\WebsitePasswordCommand(),
+    	new SharedHostingManager\Command\WebsiteRemoveCommand(),
+	)
+);
+
+$GLOBALS['cfg'] = json_decode(json_encode($config), FALSE);
+
+$application->run();

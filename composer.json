@@ -1,0 +1,14 @@
+{
+    "require": {
+        "php" : ">=5.5.0",
+        "symfony/console": "~2.6",
+        "symfony/process": "3.0.*@dev",
+        "swiftmailer/swiftmailer": "@stable"
+    },
+ 
+    "autoload": {
+        "psr-4": {
+            "SharedHostingManager\\": "src/SharedHostingManager/"
+        }
+    }
+}

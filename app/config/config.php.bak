@@ -1,0 +1,35 @@
+<?php
+
+$config = array(
+	'mysql' => array(
+		'host'          => 'localhost',
+		'user'          => '', // Insert here your MySQL User
+		'password'      => '' // Password for this user ;)
+	),
+	'phpmyadmin' => array(
+		'url'			 => 'https://www.yoursite.com/pma',
+		'htpass'         => '/etc/nginx/pma_pass' // Empty if you don't use htaccess over PMA
+	),
+	'nginx' => array(
+		'siteAvailable' => '/etc/nginx/sites-available/',
+		'siteEnabled'   => '/etc/nginx/sites-enabled/',
+		'webGroup'      => "www-data",
+		'restartCmd'    => 'service nginx restart'
+	),
+	'php' => array(
+		'pool'          => '/etc/php5/fpm/pool.d/',
+		'restartCmd'    => 'service php5-fpm restart'
+	),
+	'pureftpd' => array(
+		'dbName'        => 'pureftpd',
+		'baseName'      => 'ftpd',
+		'quota'         => array(
+			'ULBandwidth' => '2048', //Kb
+			'DLBandwidth' => '2048', //Kb
+			'QuotaSize'   => '5000', //MB
+			'QuotaFiles'  => '0'
+		),
+		'restartCmd'    => 'service pure-ftpd-mysql restart'
+	),
+	'prod' => false // true|false. False =  Dev, only logs; True = Prod, write files & conf on your server
+);

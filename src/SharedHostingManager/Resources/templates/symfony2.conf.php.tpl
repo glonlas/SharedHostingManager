@@ -1,0 +1,1 @@
+vanilla.conf.php.tpl
