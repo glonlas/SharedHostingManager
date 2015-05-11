@@ -2,6 +2,8 @@
 
 namespace SharedHostingManager\Classes;
 
+use SharedHostingManager\Classes\TLDExtract;
+
 class Website
 {
 	private $email 		= null;
@@ -15,9 +17,16 @@ class Website
 	private $homePath 	= null;
 	private $htdocsPath = null;
 
+    private $extract   = null;
+
     const PRESET_WORDPRESS = 'wordpress';
     const PRESET_SYMFONY = 'symfony2';
     const PRESET_VANILLA = 'vanilla';
+
+    function __construct()
+    {
+         $this->extract = new TLDExtract();
+    }
 
 	public static function newPassword()
 	{
@@ -174,7 +183,8 @@ class Website
     {
     	if(is_null($this->hostname))
     	{
-    		$this->hostname = str_replace('www.', '', $this->getUrl());
+            $components = $this->extract($this->getUrl());
+            $this->hostname = $components->domain.'.'.$components->tld;
     	}
 
     	return $this->hostname;
@@ -184,7 +194,8 @@ class Website
     {
     	if(is_null($this->username))
     	{
-    		$this->username = explode('.', $this->getHostname())[0];
+            $components = $this->extract($this->getUrl());
+            $this->username = $components->domain;
     	}
 
     	return $this->username;
