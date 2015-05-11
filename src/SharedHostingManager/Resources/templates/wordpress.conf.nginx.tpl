@@ -18,7 +18,7 @@ server {
 
 	# Default location
 	location / {
-		index  index.php index.html;
+		index index.php index.html index.htm;
 		try_files $uri/ $uri /index.php?q=$uri&$args;
 
 		# Cache header
@@ -83,23 +83,10 @@ server {
 			expires 14d;
 		}
 
-		location ~* \.(php|html)$ {
-			access_log on;
-			log_not_found on;
-			add_header Pragma public;
-			add_header Cache-Control "public";
-			expires 14d;
-		}
-
 		# SECURITY
 		# Ignore other host headers
 		if ($host !~* ^(%url%|%hostname%)$ ) {
 			return 444;
-		}
-
-		# Obfuscation rule (hide identifying files)
-		location ~ /(\.|wp-config.php|readme.html|licence.txt) {
-			return 404;
 		}
 
 		# Only allow GET , POST, and HEAD 
@@ -113,5 +100,6 @@ server {
 		}
 	} 
 
-	include preset/h5bp/basic.conf;
+	include preset/wordpress/wpsecure.conf;
+	include preset/wordpress/wpnocache.conf;
 }
