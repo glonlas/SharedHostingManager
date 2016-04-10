@@ -34,3 +34,8 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Remove tld.set
+.tld_set
+.tld_set*
+

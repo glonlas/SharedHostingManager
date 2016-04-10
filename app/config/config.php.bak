@@ -17,8 +17,8 @@ $config = array(
 		'restartCmd'    => 'service nginx restart'
 	),
 	'php' => array(
-		'pool'          => '/etc/php5/fpm/pool.d/',
-		'restartCmd'    => 'service php5-fpm restart'
+		'pool'          => '/etc/php/7.0/fpm/pool.d',
+		'restartCmd'    => 'service php7.0-fpm restart'
 	),
 	'pureftpd' => array(
 		'dbName'        => 'pureftpd',
