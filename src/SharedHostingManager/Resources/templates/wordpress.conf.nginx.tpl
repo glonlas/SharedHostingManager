@@ -59,7 +59,7 @@ server {
 			fastcgi_cache_valid 200 60m;
 			fastcgi_max_temp_file_size 4m;
 			fastcgi_cache_use_stale updating;
-			fastcgi_pass unix:/var/run/%url%.sock;
+			fastcgi_pass unix:/var/run/php/%url%.sock;
 
 			# Additional configs
 			fastcgi_pass_header Set-Cookie;

@@ -20,7 +20,7 @@ server {
     index index.php index.html index.htm;
     location ~ ^/(.+\.php)$ {
         try_files $uri =404;
-        fastcgi_pass unix:/var/run/%url%.sock;
+        fastcgi_pass unix:/var/run/php/%url%.sock;
 
         include fastcgi_params;
         fastcgi_index index.php;

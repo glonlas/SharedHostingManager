@@ -6,16 +6,16 @@ use SharedHostingManager\Classes\TLDExtract;
 
 class Website
 {
-	private $email 		= null;
-	private $url 		= null;
-	private $ftp 		= null;
-	private $mysql 		= null;
-	private $framework 	= null;
+    private $email      = null;
+    private $url        = null;
+    private $ftp        = null;
+    private $mysql      = null;
+    private $framework  = null;
 
-	private $hostname 	= null;
-	private $username 	= null;
-	private $homePath 	= null;
-	private $htdocsPath = null;
+    private $hostname   = null;
+    private $username   = null;
+    private $homePath   = null;
+    private $htdocsPath = null;
 
     private $extract   = null;
 
@@ -28,21 +28,21 @@ class Website
          $this->extract = new TLDExtract();
     }
 
-	public static function newPassword()
-	{
-		$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    public static function newPassword()
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $length = 10;
         return substr(str_shuffle($chars), 0, $length);
-	}
+    }
 
-	/**
+    /**
      * Get Email
      *
      * @return string
      */
     public function getEmail()
     {
-    	return $this->email;
+        return $this->email;
     }
 
     /**
@@ -53,23 +53,23 @@ class Website
      */
     public function setEmail($email)
     {
-    	if (filter_var($email, FILTER_VALIDATE_EMAIL))
-		{
-    		$this->email = $email;
-    		return true;
-    	}
+        if (filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+            $this->email = $email;
+            return true;
+        }
 
-    	return false;
+        return false;
     }
 
-	/**
+    /**
      * Get Website Url
      *
      * @return string
      */
     public function getUrl()
     {
-    	return $this->url;
+        return $this->url;
     }
 
     /**
@@ -80,23 +80,23 @@ class Website
      */
     public function setUrl($url)
     {
-    	if ($url != "" && !is_null($url))
-		{
-    		$this->url = $url;
-    		return true;
-    	}
+        if ($url != "" && !is_null($url))
+        {
+            $this->url = $url;
+            return true;
+        }
 
-    	return false;
+        return false;
     }
 
-	/**
+    /**
      * Get FTP password
      *
      * @return string
      */
     public function getFTPPassword()
     {
-    	return $this->ftp;
+        return $this->ftp;
     }
 
     /**
@@ -107,25 +107,25 @@ class Website
      */
     public function setFTPPassword($ftp = null)
     {
-    	// Empty? generate a random password
+        // Empty? generate a random password
         if(is_null($ftp))
         {
-			$this->ftp = $this->newPassword();
-			return false;
+            $this->ftp = $this->newPassword();
+            return false;
         }
 
-    	$this->ftp = $ftp;
-    	return true;
+        $this->ftp = $ftp;
+        return true;
     }
 
-	/**
+    /**
      * Get MySQL password
      *
      * @return string
      */
     public function getMySQLPassword()
     {
-    	return $this->mysql;
+        return $this->mysql;
     }
 
     /**
@@ -136,18 +136,18 @@ class Website
      */
     public function setMySQLPassword($mysql = null)
     {
-    	// Empty? generate a random password
+        // Empty? generate a random password
         if(is_null($mysql))
         {
-			$this->mysql = $this->newPassword();
-			return false;
+            $this->mysql = $this->newPassword();
+            return false;
         }
 
-    	$this->mysql = $mysql;
-    	return true;
+        $this->mysql = $mysql;
+        return true;
     }
 
-	/**
+    /**
      * Get Framework
      *
      * @return string
@@ -176,48 +176,48 @@ class Website
      */
     public function setFramework($framework)
     {
-    	$this->framework = $framework;
+        $this->framework = $framework;
     }
 
     public function getHostname()
     {
-    	if(is_null($this->hostname))
-    	{
-            $components = $this->extract($this->getUrl());
+        if(is_null($this->hostname))
+        {
+            $components = $this->extract->extract($this->getUrl());
             $this->hostname = $components->domain.'.'.$components->tld;
-    	}
+        }
 
-    	return $this->hostname;
+        return $this->hostname;
     }
 
     public function getUsername()
     {
-    	if(is_null($this->username))
-    	{
-            $components = $this->extract($this->getUrl());
+        if(is_null($this->username))
+        {
+            $components = $this->extract->extract($this->getUrl());
             $this->username = $components->domain;
-    	}
+        }
 
-    	return $this->username;
+        return $this->username;
     }
 
     public function getHome()
     {
-    	if(is_null($this->homePath))
-    	{
-    		$this->homePath = '/home/'.$this->getHostname();
-    	}
+        if(is_null($this->homePath))
+        {
+            $this->homePath = '/home/'.$this->getHostname();
+        }
 
-    	return $this->homePath;
+        return $this->homePath;
     }
 
     public function getHtdocs()
     {
-    	if(is_null($this->htdocsPath))
-    	{
-    		$this->htdocsPath = $this->getHome().'/htdocs';
-    	}
+        if(is_null($this->htdocsPath))
+        {
+            $this->htdocsPath = $this->getHome().'/htdocs';
+        }
 
-    	return $this->htdocsPath;
+        return $this->htdocsPath;
     }
 }
